@@ -59,11 +59,11 @@
 					%>
 					<tr class="comment">
 						<th>댓글번호</th>
-						<td><%=cvo.getComment_no()%></td>
+						<th><%=cvo.getComment_no()%></th>
 						<th>댓글내용</th>
 						<td><%=cvo.getComment_content()%></td>
 						<th>댓글일시</th>
-						<td><%=cvo.getRegdate()%></td>
+						<th><%=cvo.getRegdate()%></th>
 					</tr>
 					<%
 						}
