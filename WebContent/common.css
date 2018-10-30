@@ -125,6 +125,9 @@ section {
 .gcnt {
 	width: 10%;
 }
+.comment{
+	background-color: lightgray;
+}
 
 .listtable a {
 	text-decoration: none;

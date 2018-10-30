@@ -57,7 +57,7 @@
 						if (lsv != null && lsv.size() > 0) {
 							for (S_Comment_VO cvo : lsv) {
 					%>
-					<tr>
+					<tr class="comment">
 						<th>댓글번호</th>
 						<td><%=cvo.getComment_no()%></td>
 						<th>댓글내용</th>
