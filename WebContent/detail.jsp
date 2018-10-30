@@ -81,6 +81,8 @@
 						autocomplete="off" type="text" /> <input type="submit"
 						value="댓글 달기" />
 				</form>
+				<a href="DeleteBoardServlet?Board_No=<%=vo.getBoard_No()%>"><button
+						type="button">글삭제</button></a>
 			</section>
 		</div>
 		<footer>CopyRight by HkItEdu</footer>

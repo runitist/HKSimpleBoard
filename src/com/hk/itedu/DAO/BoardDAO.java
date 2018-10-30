@@ -359,30 +359,77 @@ public class BoardDAO {
 
 		System.out.println("[updateCnt 메서드 종료]");
 	}
-	
-	public static void deleteComment(int board_no, int comment_no){
-		//댓글을 지우는 메서드
+
+	public static void deleteComment(int board_no, int comment_no) {
+		// 댓글을 지우는 메서드
 		System.out.println("[deleteComment 메서드 실행]");
 		Connection conn = DBConnector.getConn();
 		PreparedStatement ps = null;
-		
+
 		String sql = "delete from s_comment where "
 				+ " board_no = ? and comment_no = ? ";
-		
-		try{
+
+		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board_no);
 			ps.setInt(2, comment_no);
 			ps.execute();
 
 			System.out.println("댓글 지움 성공");
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("댓글 지움 실패");
 			e.printStackTrace();
-		}finally{
+		} finally {
 			DBConnector.closeConn(null, ps, conn);
 		}
-		
+
 		System.out.println("[deleteComment 메서드 종료]");
+	}
+
+	public static void deleteCommentAll(int board_no) {
+		// 해당 보드의 모든 댓글을 삭제하는 메서드
+		System.out.println("[deleteComment 메서드 실행]");
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+
+		String sql = "delete from s_comment where board_no = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			ps.execute();
+			System.out.println("댓글 모두 삭제 완료");
+		} catch (Exception e) {
+			System.out.println("댓글 모두 삭제 실패");
+			e.printStackTrace();
+		} finally {
+			DBConnector.closeConn(null, ps, conn);
+		}
+
+		System.out.println("[deleteComment 메서드 종료]");
+	}
+
+	public static void deleteBoard(int board_no) {
+		// 해당 보드를 삭제하는 메서드
+		System.out.println("[deleteBoard 메서드 실행]");
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+		deleteCommentAll(board_no);// 이 메서드를 실행 전에 댓글 삭제
+		
+		String sql = "delete from s_board where board_no=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			ps.execute();
+			System.out.println("글 삭제 완료");
+		} catch (Exception e) {
+			System.out.println("글 삭제 실패");
+			e.printStackTrace();
+		} finally {
+			DBConnector.closeConn(null, ps, conn);
+		}
+
+		System.out.println("[deleteBoard 메서드 종료]");
 	}
 }
