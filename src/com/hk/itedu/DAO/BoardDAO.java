@@ -96,7 +96,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 		String sql = "select board_no, board_title, board_content, "
 				+ " TO_CHAR(regdate, 'yyyy-mm-dd') regdate, "
-				+ " cnt from s_board order by board_no";
+				+ " cnt from s_board order by board_no desc";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -194,7 +194,7 @@ public class BoardDAO {
 
 		String sql = "select comment_no, comment_content, "
 				+ " to_char(regdate, 'yyyy-mm-dd') regdate "
-				+ "from s_comment where board_no = ? order by comment_no";
+				+ "from s_comment where board_no = ? order by comment_no desc";
 
 		try {
 			ps = conn.prepareStatement(sql);
