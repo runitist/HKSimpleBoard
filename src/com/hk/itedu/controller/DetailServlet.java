@@ -30,6 +30,7 @@ public class DetailServlet extends HttpServlet {
 		List<S_Comment_VO> lsv = BoardDAO.getComment(Board_No);
 		
 		if(bn != Board_No){
+			//새로고침시 카운터 증가를 막는 로직
 			BoardDAO.updateCnt(Board_No);//해당글 방문시 방문수를 늘려주기 위한 메서드 실행
 			vo.setCnt(vo.getCnt()+1);
 			bn = Board_No;
