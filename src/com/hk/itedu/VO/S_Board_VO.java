@@ -1,7 +1,8 @@
 package com.hk.itedu.VO;
 
 public class S_Board_VO {
-
+	//게시판 정보를 담아서 이동할 객체
+	
 	private int Board_No;
 	private String Board_Title;
 	private String Board_Content;

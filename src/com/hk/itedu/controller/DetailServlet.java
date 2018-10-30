@@ -1,6 +1,7 @@
 package com.hk.itedu.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hk.itedu.DAO.BoardDAO;
 import com.hk.itedu.VO.S_Board_VO;
+import com.hk.itedu.VO.S_Comment_VO;
 
 @WebServlet("/DetailServlet")
 public class DetailServlet extends HttpServlet {
@@ -24,7 +26,9 @@ public class DetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int Board_No = Integer.parseInt(request.getParameter("Board_No"));//각 a테그의 ?url파라미터로 받아온 게시번호를 가져옴.
 		S_Board_VO vo = BoardDAO.get_S_Board(Board_No);//가져온 게시번호를 사용해 DB의 글 본문을 가져옴.
+		List<S_Comment_VO> lsv = BoardDAO.getComment(Board_No);
 		request.setAttribute("vo", vo);//가져온 글 본문의 VO 객체를 detail.jsp로 넘겨줌.
+		request.setAttribute("lsv", lsv);
 		RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
 		rd.forward(request, response);
 	}

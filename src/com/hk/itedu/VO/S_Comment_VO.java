@@ -1,10 +1,12 @@
 package com.hk.itedu.VO;
 
 public class S_Comment_VO {
+	//댓글 정보를 담아서 이동할 객체
+	
 	private int board_no;
 	private int comment_no;
 	private String comment_content;
-	private String date;
+	private String regdate;
 
 	public int getBoard_no() {
 		return board_no;
@@ -30,12 +32,12 @@ public class S_Comment_VO {
 		this.comment_content = comment_content;
 	}
 
-	public String getDate() {
-		return date;
+	public String getRegdate() {
+		return regdate;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 
 }

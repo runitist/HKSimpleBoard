@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hk.itedu.VO.S_Board_VO;
+import com.hk.itedu.VO.S_Comment_VO;
 
 public class BoardDAO {
 	// 게시판 DB 자료를 다루기 위한 클래스
@@ -183,5 +184,44 @@ public class BoardDAO {
 
 		System.out.println("[get_S_Board 메서드 종료]");
 		return vo;
+	}
+	
+	public static List<S_Comment_VO> getComment(int board_no){
+		//해당 글의 댓글을 가져와 리스트화 하는 메서드
+		System.out.println("[getComment 메서드 실행]");
+		List<S_Comment_VO> lsv = new ArrayList<S_Comment_VO>();
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "select comment_no, comment_content, "
+				+ " to_char(regdate, 'yyyy-mm-dd') regdate "
+				+ "from s_comment where board_no = ? order by comment_no";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				S_Comment_VO vo = new S_Comment_VO();
+				int comment_no = rs.getInt("comment_no");
+				String comment_content = rs.getString("comment_content");
+				String regdate = rs.getString("regdate");
+				vo.setBoard_no(board_no);
+				vo.setComment_no(comment_no);
+				vo.setComment_content(comment_content);
+				vo.setRegdate(regdate);
+				
+				lsv.add(vo);
+			}
+			System.out.println("댓글 가져오기 성공");
+		}catch(Exception e){
+			System.out.println("댓글 가져오기 실패");
+			e.printStackTrace();
+		}finally{
+			DBConnector.closeConn(rs, ps, conn);
+		}
+		System.out.println("[getComment 메서드 종료]");
+		return lsv;
 	}
 }

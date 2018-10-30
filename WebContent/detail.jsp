@@ -1,3 +1,5 @@
+<%@page import="com.hk.itedu.VO.S_Comment_VO"%>
+<%@page import="java.util.List"%>
 <%@page import="com.hk.itedu.VO.S_Board_VO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -13,6 +15,8 @@
 		vo.setRegdate("0000-00-00");
 		vo.setCnt(0);
 	}
+	List<S_Comment_VO> lsv = (List<S_Comment_VO>) request
+			.getAttribute("lsv");
 %>
 <!DOCTYPE html>
 <html>
@@ -39,24 +43,38 @@
 					<tr>
 						<th>게시번호</th>
 						<th><%=vo.getBoard_No()%></th>
-					</tr>
-					<tr>
 						<th>제목</th>
-						<th><%=vo.getBoard_Title()%></th>
-					</tr>
-					<tr>
+						<th class="tabletitle"><%=vo.getBoard_Title()%></th>
 						<th>게시일</th>
 						<th><%=vo.getRegdate()%></th>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<th><%=vo.getBoard_Content()%></th>
-					</tr>
-					<tr>
 						<th>카운트</th>
 						<th><%=vo.getCnt()%></th>
 					</tr>
+					<tr>
+						<td colspan="8"> 내용 : <br /> <%=vo.getBoard_Content()%></td>
+					</tr>
+					<%
+						if (lsv != null && lsv.size() > 0) {
+							for (S_Comment_VO cvo : lsv) {
+					%>
+					<tr>
+						<th>댓글번호</th>
+						<td><%=cvo.getComment_no()%></td>
+						<th>댓글내용</th>
+						<td><%=cvo.getComment_content()%></td>
+						<th>댓글일시</th>
+						<td><%=cvo.getRegdate()%></td>
+					</tr>
+					<%
+						}
+						}
+					%>
 				</table>
+				<form action="CommentServlet" method="post">
+					<label for="comment_content">댓글</label><input
+						name="comment_content" id="comment_content" type="text" /> <input
+						type="submit" value="댓글 달기" />
+				</form>
 			</section>
 		</div>
 		<footer>CopyRight by HkItEdu</footer>

@@ -77,9 +77,14 @@ section {
 	justify-content: center;
 }
 
+.tabletitle {
+	width: 50%;
+}
+
 .detailsec {
 	display: flex;
-	justify-content: center;
+	flex-direction : column;
+	align-items : center;
 }
 
 .detailsec>table {
