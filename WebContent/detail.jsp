@@ -47,11 +47,11 @@
 						<th class="tabletitle"><%=vo.getBoard_Title()%></th>
 						<th>게시일</th>
 						<th><%=vo.getRegdate()%></th>
-						<th>카운트</th>
+						<th>방문수</th>
 						<th><%=vo.getCnt()%></th>
 					</tr>
 					<tr>
-						<td colspan="8">내용 : <br /> <%=vo.getBoard_Content()%></td>
+						<td colspan="8" class="detailneyong"><p>내용 : <br /> <%=vo.getBoard_Content()%></p></td>
 					</tr>
 					<%
 						if (lsv != null && lsv.size() > 0) {

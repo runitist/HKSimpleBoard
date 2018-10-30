@@ -97,6 +97,14 @@ section {
 	border: 1px solid black;
 }
 
+.detailneyong {
+	height: 75vh;
+}
+.detailneyong>p{
+	height: 100%;
+	width: 100%;
+}
+
 .listsec {
 	display: flex;
 	justify-content: center;
@@ -126,7 +134,8 @@ section {
 .gcnt {
 	width: 10%;
 }
-.comment{
+
+.comment {
 	background-color: lightgray;
 }
 
