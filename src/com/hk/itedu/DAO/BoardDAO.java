@@ -307,4 +307,56 @@ public class BoardDAO {
 		System.out.println("[getCommentCnt 메서드 종료]");
 		return cmcnt;
 	}
+
+	public static int getCnt(int board_no) {
+		// s_board의 각 board_no 별 cnt 값을 가져오는 메서드 방문자수 가져옴.
+		System.out.println("[getCnt 메서드 실행]");
+		int cnt = 0;
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String sql = "select cnt from s_board where board_no =?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+			System.out.println("방문자수 갖고오기 성공");
+		} catch (Exception e) {
+			System.out.println("방문자수 갖고오기 실패");
+			e.printStackTrace();
+		} finally {
+			DBConnector.closeConn(rs, ps, conn);
+		}
+
+		System.out.println("[getCnt 메서드 종료]");
+		return cnt;
+	}
+
+	public static void updateCnt(int board_no) {
+		// 방문자수 업데이트를 위한 메서드
+		System.out.println("[updateCnt 메서드 실행]");
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+		String sql = "update s_board set cnt = ? where board_no=?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, getCnt(board_no) + 1);
+			ps.setInt(2, board_no);
+			ps.execute();
+			System.out.println("방문자수 업데이트 완료");
+		} catch (Exception e) {
+			System.out.println("방문자수 업데이트 실패");
+			e.printStackTrace();
+		} finally {
+			DBConnector.closeConn(null, ps, conn);
+		}
+
+		System.out.println("[updateCnt 메서드 종료]");
+	}
 }
