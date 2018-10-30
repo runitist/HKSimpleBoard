@@ -32,6 +32,7 @@
 						<th class="gno">게시번호</th>
 						<th class="gna">제목</th>
 						<th class="gda">게시일</th>
+						<th class="gcnt">방문수</th>
 					</tr>
 
 					<%
@@ -42,6 +43,7 @@
 						<th><%=vo.getBoard_No()%></th>
 						<td><a href="DetailServlet?Board_No=<%=vo.getBoard_No()%>"><%=vo.getBoard_Title()%></a></td>
 						<th><%=vo.getRegdate()%></th>
+						<th><%=vo.getCnt()%></th>
 					</tr>
 					<%
 						}
