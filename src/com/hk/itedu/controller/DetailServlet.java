@@ -27,7 +27,7 @@ public class DetailServlet extends HttpServlet {
 		int Board_No = Integer.parseInt(request.getParameter("Board_No"));//각 a테그의 ?url파라미터로 받아온 게시번호를 가져옴.
 		S_Board_VO vo = BoardDAO.get_S_Board(Board_No);//가져온 게시번호를 사용해 DB의 글 본문을 가져옴.
 		List<S_Comment_VO> lsv = BoardDAO.getComment(Board_No);
-		BoardDAO.updateCnt(Board_No);
+		BoardDAO.updateCnt(Board_No);//해당글 방문시 방문수를 늘려주기 위한 메서드 실행
 		vo.setCnt(vo.getCnt()+1);
 		request.setAttribute("vo", vo);//가져온 글 본문의 VO 객체를 detail.jsp로 넘겨줌.
 		request.setAttribute("lsv", lsv);
