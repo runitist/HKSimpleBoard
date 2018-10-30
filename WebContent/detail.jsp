@@ -51,7 +51,7 @@
 						<th><%=vo.getCnt()%></th>
 					</tr>
 					<tr>
-						<td colspan="8"> 내용 : <br /> <%=vo.getBoard_Content()%></td>
+						<td colspan="8">내용 : <br /> <%=vo.getBoard_Content()%></td>
 					</tr>
 					<%
 						if (lsv != null && lsv.size() > 0) {
@@ -70,9 +70,10 @@
 						}
 					%>
 				</table>
-				<form action="CommentServlet" method="post">
+				<form action="CommentServlet?Board_No=<%=vo.getBoard_No()%>"
+					method="post">
 					<label for="comment_content">댓글</label><input
-						name="comment_content" id="comment_content" type="text" /> <input
+						name="comment_content" required="required" id="comment_content" autocomplete="off" type="text" /> <input
 						type="submit" value="댓글 달기" />
 				</form>
 			</section>
