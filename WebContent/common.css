@@ -100,7 +100,13 @@ section {
 .detailneyong {
 	height: 75vh;
 }
-.detailneyong>p{
+
+.detailneyong>p {
+	height: 100%;
+	width: 100%;
+}
+
+.xbutton {
 	height: 100%;
 	width: 100%;
 }

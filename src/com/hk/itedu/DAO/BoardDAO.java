@@ -359,4 +359,30 @@ public class BoardDAO {
 
 		System.out.println("[updateCnt 메서드 종료]");
 	}
+	
+	public static void deleteComment(int board_no, int comment_no){
+		//댓글을 지우는 메서드
+		System.out.println("[deleteComment 메서드 실행]");
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+		
+		String sql = "delete from s_comment where "
+				+ " board_no = ? and comment_no = ? ";
+		
+		try{
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			ps.setInt(2, comment_no);
+			ps.execute();
+
+			System.out.println("댓글 지움 성공");
+		}catch(Exception e){
+			System.out.println("댓글 지움 실패");
+			e.printStackTrace();
+		}finally{
+			DBConnector.closeConn(null, ps, conn);
+		}
+		
+		System.out.println("[deleteComment 메서드 종료]");
+	}
 }

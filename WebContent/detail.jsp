@@ -51,7 +51,9 @@
 						<th><%=vo.getCnt()%></th>
 					</tr>
 					<tr>
-						<td colspan="8" class="detailneyong"><p>내용 : <br /> <%=vo.getBoard_Content()%></p></td>
+						<td colspan="8" class="detailneyong"><p>
+								내용 : <br />
+								<%=vo.getBoard_Content()%></p></td>
 					</tr>
 					<%
 						if (lsv != null && lsv.size() > 0) {
@@ -64,6 +66,8 @@
 						<td><%=cvo.getComment_content()%></td>
 						<th>댓글일시</th>
 						<th><%=cvo.getRegdate()%></th>
+						<td><button class="xbutton"
+								onclick="location.href='DeleteServlet?board_no=<%=cvo.getBoard_no()%>&comment_no=<%=cvo.getComment_no()%>'">X</button></td>
 					</tr>
 					<%
 						}
@@ -73,8 +77,9 @@
 				<form action="CommentServlet?Board_No=<%=vo.getBoard_No()%>"
 					method="post">
 					<label for="comment_content">댓글</label><input
-						name="comment_content" required="required" id="comment_content" autocomplete="off" type="text" /> <input
-						type="submit" value="댓글 달기" />
+						name="comment_content" required="required" id="comment_content"
+						autocomplete="off" type="text" /> <input type="submit"
+						value="댓글 달기" />
 				</form>
 			</section>
 		</div>
