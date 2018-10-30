@@ -1,3 +1,4 @@
+<%@page import="com.hk.itedu.DAO.BoardDAO"%>
 <%@page import="com.hk.itedu.VO.S_Board_VO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -41,7 +42,7 @@
 					%>
 					<tr>
 						<th><%=vo.getBoard_No()%></th>
-						<td><a href="DetailServlet?Board_No=<%=vo.getBoard_No()%>"><%=vo.getBoard_Title()%></a></td>
+						<td><a href="DetailServlet?Board_No=<%=vo.getBoard_No()%>"><%=vo.getBoard_Title()%>(<%=BoardDAO.getCommentCnt(vo.getBoard_No()) %>)</a></td>
 						<th><%=vo.getRegdate()%></th>
 						<th><%=vo.getCnt()%></th>
 					</tr>

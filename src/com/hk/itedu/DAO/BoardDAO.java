@@ -222,36 +222,36 @@ public class BoardDAO {
 		System.out.println("[getComment 메서드 종료]");
 		return lsv;
 	}
-	
-	public static int getMaxCommentNo(int board_no){
-		//s_comment의 commentno의 최대 값을 갖고오는 메서드
+
+	public static int getMaxCommentNo(int board_no) {
+		// s_comment의 commentno의 최대 값을 갖고오는 메서드
 		System.out.println("[getMaxCommentNo 메서드 실행]");
 		int maxno = 0;
 		Connection conn = DBConnector.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		String sql = "select max(comment_no) cno from s_comment where board_no = ?";
-		
-		try{
+
+		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board_no);
 			rs = ps.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				maxno = rs.getInt("cno");
 			}
 			System.out.println("comment 최대번호 갖고오기 성공");
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("comment 최대번호 갖고오기 실패");
 			e.printStackTrace();
-		}finally{
+		} finally {
 			DBConnector.closeConn(rs, ps, conn);
 		}
-		
+
 		System.out.println("[getMaxCommentNo 메서드 종료]");
 		return maxno;
 	}
-	
+
 	public static void insertComment(int board_no, String comment_content) {
 		// s_comment에 값을 입력하는 메서드(댓글 입력)
 		System.out.println("[insertComment 메서드 실행]");
@@ -265,7 +265,7 @@ public class BoardDAO {
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board_no);
-			ps.setInt(2, getMaxCommentNo(board_no)+1);
+			ps.setInt(2, getMaxCommentNo(board_no) + 1);
 			ps.setString(3, comment_content);
 			ps.execute();
 			System.out.println("댓글 입력 성공");
@@ -276,5 +276,35 @@ public class BoardDAO {
 			DBConnector.closeConn(null, ps, conn);
 		}
 		System.out.println("[insertComment 메서드 종료]");
+	}
+
+	public static int getCommentCnt(int board_no) {
+		// 코맨트 수를 갖고오기 위한 메서드
+		System.out.println("[getCommentCnt 메서드 실행]");
+		int cmcnt = 0;
+		Connection conn = DBConnector.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String sql = "select count(comment_no) cno from s_comment where board_no = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board_no);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cmcnt = rs.getInt("cno");
+			}
+
+			System.out.println("코맨트 수 갖고오기 성공");
+		} catch (Exception e) {
+			System.out.println("코맨트 수 갖고오기 실패");
+			e.printStackTrace();
+		} finally {
+			DBConnector.closeConn(rs, ps, conn);
+		}
+
+		System.out.println("[getCommentCnt 메서드 종료]");
+		return cmcnt;
 	}
 }
